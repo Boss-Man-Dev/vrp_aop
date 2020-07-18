@@ -214,12 +214,11 @@ function AOP:__construct()
 	
    
 	vRP.EXT.GUI:registerMenuBuilder("admin", function(menu)
-		for _,nuser in pairs(vRP.EXT.Group:getUsersByPermission(self.cfg.nuser)) do
-			if nuser:hasPermission(self.cfg.admin) then
-				menu:addOption("AOP", function(menu)
-					menu.user:openMenu("aop")
-				end)
-			end
+		local user = menu.user
+		if user:hasPermission(self.cfg.admin) then
+			menu:addOption("AOP", function(menu)
+				menu.user:openMenu("aop")
+			end)
 		end
 	end)
 end
